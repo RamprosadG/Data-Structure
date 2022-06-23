@@ -44,9 +44,8 @@ const int N   = (int) 2e5 + 5;
 vector<ll> B1, B2;
 
 void update(vector<ll>& bit, int n, int x, ll val) {
-    while (x <= n) {
-        bit[x] += val;
-        x += (x & -x);
+    for (int i = x; i <= n; i += (i & -i)) {
+        bit[i] += val;
     }
 }
 
@@ -62,9 +61,8 @@ void update(int n, int l, int r, ll val) {
 
 ll query(vector<ll>& bit, int x) {
     ll ans = 0;
-    while (x > 0) {
-        ans += bit[x];
-        x -= (x & -x);
+    for (int i = x; i > 0; i -= (i & -i)) {
+        ans += bit[i];
     }
     return ans;
 }

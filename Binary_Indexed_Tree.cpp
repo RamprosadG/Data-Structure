@@ -44,17 +44,15 @@ const int N   = (int) 2e5 + 5;
 ll bit[N];
 
 void update(int n, int x, ll val) {
-	while (x <= n) {
-		bit[x] += val;
-		x += (x & -x);
+	for (int i = x; i <= n; i += (i & -i)) {
+		bit[i] += val;
 	}
 }
 
 ll query(int x) {
 	ll ans = 0;
-	while (x > 0) {
-		ans += bit[x];
-		x -= (x & -x);
+	for (int i = x; i > 0; i -= (i & -i)) {
+		ans += bit[i];
 	}
 	return ans;
 }

@@ -44,25 +44,19 @@ const int N   = (int) 2e3 + 5;
 ll bit[N][N];
 
 void update(int n, int m, int x, int y, ll val) {
-	while (x <= n) {
-		int s = y;
-		while (s <= m) {
-			bit[x][s] += val;
-			s += (s & -s);
+	for (int i = x; i <= n; i += (i & -i)) {
+		for (int j = y; j <= m; j += (j & -j)) {
+			bit[i][j] += val;
 		}
-		x += (x & -x);
 	}
 }
 
 ll query(int x, int y) {
 	ll ans = 0;
-	while (x > 0) {
-		int s = y;
-		while (s > 0) {
-			ans += bit[x][s];
-			s -= (s & -s);
+	for (int i = x; i > 0; i -= (i & -i)) {
+		for (int j = y; j > 0; j -= (j & -j)) {
+			ans += bit[i][j];
 		}
-		x -= (x & -x);
 	}
 	return ans;
 }

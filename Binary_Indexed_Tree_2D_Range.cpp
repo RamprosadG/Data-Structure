@@ -45,13 +45,10 @@ vector<vector<ll>> B1, B2, B3, B4;
 int n, m;
 
 void update(vector<vector<ll>>& bit, int x, int y, ll val) {
-	while (x <= n) {
-		int s = y;
-		while (s <= m) {
-			bit[x][s] += val;
-			s += (s & -s);
+	for (int i = x; i <= n; i += (i & -i)) {
+		for (int j = y; j <= m; j += (j & -j)) {
+			bit[i][j] += val;
 		}
-		x += (x & -x);
 	}
 }
 
@@ -71,13 +68,10 @@ void update(int x1, int y1, int x2, int y2, ll val) {
 
 ll query(vector<vector<ll>>& bit, int x, int y) {
 	ll ans = 0;
-	while (x > 0) {
-		int s = y;
-		while (s > 0) {
-			ans += bit[x][s];
-			s -= (s & -s);
+	for (int i = x; i > 0; i -= (i & -i)) {
+		for (int j = y; j > 0; j -= (j & -j)) {
+			ans += bit[i][j];
 		}
-		x -= (x & -x);
 	}
 	return ans;
 }

@@ -77,7 +77,7 @@ ll query(vector<vector<ll>>& bit, int x, int y) {
 }
 
 ll query(int x, int y) {
-	return query(B1, x, y) * (1LL * x * y + x + y + 1) - query(B2, x, y) * (y + 1) - query(B3, x, y) * (x + 1) + query(B4, x, y);
+	return query(B1, x, y) * (x + 1) * (y + 1) - query(B2, x, y) * (y + 1) - query(B3, x, y) * (x + 1) + query(B4, x, y);
 }
 
 ll query(int x1, int y1, int x2, int y2) {
